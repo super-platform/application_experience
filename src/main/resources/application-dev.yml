@@ -1,5 +1,5 @@
 server:
-  port: 8082
+  port: 8085
   servlet:
     context-path: /
 
@@ -38,3 +38,17 @@ rest:
 
 keycloak:
   enabled: true
+
+
+#URL
+url:
+  novel-backend-service:
+    author:
+      create: ${NOVEL_BACKEND_SERVICE}/api/v1/authors/create
+      paginate: ${NOVEL_BACKEND_SERVICE}/api/v1/authors/paginate
+    chapter:
+      create: ${NOVEL_BACKEND_SERVICE}/api/v1/chapters/create
+      paginate: ${NOVEL_BACKEND_SERVICE}/api/v1/chapters/paginate
+    novel:
+      create: ${NOVEL_BACKEND_SERVICE}/api/v1/novels/create
+      paginate: ${NOVEL_BACKEND_SERVICE}/api/v1/novels/paginate
