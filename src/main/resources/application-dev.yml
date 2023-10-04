@@ -1,61 +1,20 @@
 server:
-  port: 8084
+  port: 8085
   servlet:
     context-path: /
 
 spring:
   application:
-    name: novel
+    name: application experience
   main:
     allow-bean-definition-overriding: true
-  jpa:
-    open-in-view: false
-  kafka:
-    producer:
-      value-serializer: org.apache.kafka.common.serialization.StringSerializer
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      bootstrap-servers:
-        - localhost:9092
-    consumer:
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      auto-offset-reset: earliest
-      bootstrap-servers:
-        - localhost:9092
-    listener:
-      missing-topics-fatal: false
-  data:
-    mongodb:
-      inquiry-db:
-        uri: mongodb://mongo:mongo123@localhost:27017/inquiryDB?retryWrites=true&w=majority&directConnection=true&authMechanism=SCRAM-SHA-1&authSource=admin
 ###swagger
 application:
   description: Novel
   version: 1.0
-build.date: 2023-07-02
-
+build.date: 2023-09-30
 ###Timeout api
 rest:
   template:
     read: 30000
     connect: 30000
-
-#  security:
-#    oauth2:
-#      client:
-#        registration:
-#          keycloak:
-#            client-id: clientId
-#            client-secret: uuid
-#            scope: openid
-#            authorization-grant-type: authorization_code
-#        provider:
-#          keycloak:
-#            issuer-uri: https://kecloak.com
-#            user-name-attribute: preferred_username
-#      resourceserver:
-#        jwt:
-#          issuer-uri: https://kecloak.com
-
-keycloak:
-  enabled: false
