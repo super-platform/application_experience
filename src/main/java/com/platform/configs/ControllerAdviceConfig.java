@@ -2,7 +2,7 @@ package com.platform.configs;
 
 
 import com.platform.common.constant.ResponseCode;
-import com.platform.common.dto.response.ResponseWithBody;
+import com.platform.common.dto.ResponseWithBody;
 import com.platform.common.utils.ResponseUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
