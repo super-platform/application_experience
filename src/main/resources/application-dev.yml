@@ -5,7 +5,7 @@ server:
 
 spring:
   application:
-    name: application experience
+    name: application_experience
   main:
     allow-bean-definition-overriding: true
   security:
@@ -52,3 +52,9 @@ url:
     novel:
       create: ${NOVEL_BACKEND_SERVICE}/api/v1/novels/create
       paginate: ${NOVEL_BACKEND_SERVICE}/api/v1/novels/paginate
+
+### connect to eureka server
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8070/eureka
