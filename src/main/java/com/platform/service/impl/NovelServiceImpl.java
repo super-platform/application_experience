@@ -20,6 +20,10 @@ import java.util.HashMap;
 @Slf4j
 public class NovelServiceImpl extends BaseServiceImpl implements NovelService {
 
+    @Value(value = "${url.novel-backend-service.novel.findById}")
+    private String findByIdUrl;
+
+
     @Value(value = "${url.novel-backend-service.novel.create}")
     private String createUrl;
 
@@ -28,6 +32,11 @@ public class NovelServiceImpl extends BaseServiceImpl implements NovelService {
 
     public NovelServiceImpl(RestTemplate restTemplateAPI, ObjectMapper objectMapper) {
         super(restTemplateAPI, objectMapper);
+    }
+
+    @Override
+    public ResponseWithBody<NovelDTO> findById(Long id) {
+        return getResultCall(null, String.format(findByIdUrl, id), HttpMethod.GET, new HashMap<>(), NovelDTO.class);
     }
 
     @Override

@@ -44,12 +44,15 @@ keycloak:
 url:
   novel-backend-service:
     author:
+      findById: ${NOVEL_BACKEND_SERVICE}/api/v1/authors/%s
       create: ${NOVEL_BACKEND_SERVICE}/api/v1/authors/create
       paginate: ${NOVEL_BACKEND_SERVICE}/api/v1/authors/paginate
     chapter:
+      findById: ${NOVEL_BACKEND_SERVICE}/api/v1/chapters/%s
       create: ${NOVEL_BACKEND_SERVICE}/api/v1/chapters/create
       paginate: ${NOVEL_BACKEND_SERVICE}/api/v1/chapters/paginate
     novel:
+      findById: ${NOVEL_BACKEND_SERVICE}/api/v1/novels/%s
       create: ${NOVEL_BACKEND_SERVICE}/api/v1/novels/create
       paginate: ${NOVEL_BACKEND_SERVICE}/api/v1/novels/paginate
 

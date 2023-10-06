@@ -1,6 +1,7 @@
 package com.platform.controller.publish;
 
 import com.platform.common.dto.ResponseWithBody;
+import com.platform.common.dto.chapter.ChapterDTO;
 import com.platform.common.dto.novel.NovelCreateDTO;
 import com.platform.common.dto.novel.NovelDTO;
 import com.platform.common.dto.request.PageableRequest;
@@ -14,10 +15,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.MDC;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
@@ -30,6 +28,14 @@ import static com.platform.common.constant.CommonConstants.TRACE_ID;
 @RequiredArgsConstructor
 public class NovelController {
     private final NovelService novelService;
+
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Indicates that the request was executed successfully"),
+            @ApiResponse(responseCode = "500", description = "Indicates that there is a server error occurs during executing the request")})
+    @GetMapping(value = "/{id}", produces = "application/json")
+    public ResponseWithBody<NovelDTO> findById(@PathVariable Long id){
+        return novelService.findById(id);
+    }
 
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Indicates that the request was executed successfully"),

@@ -19,6 +19,9 @@ import java.util.HashMap;
 @Slf4j
 public class AuthorServiceImpl extends BaseServiceImpl implements AuthorService {
 
+    @Value(value = "${url.novel-backend-service.author.findById}")
+    private String findByIdUrl;
+
     @Value(value = "${url.novel-backend-service.author.create}")
     private String createUrl;
 
@@ -27,6 +30,11 @@ public class AuthorServiceImpl extends BaseServiceImpl implements AuthorService 
 
     public AuthorServiceImpl(RestTemplate restTemplateAPI, ObjectMapper objectMapper) {
         super(restTemplateAPI, objectMapper);
+    }
+
+    @Override
+    public ResponseWithBody<AuthorDTO> findById(Long id) {
+        return getResultCall(null, String.format(findByIdUrl, id), HttpMethod.GET, new HashMap<>(), AuthorDTO.class);
     }
 
     @Override

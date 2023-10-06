@@ -7,6 +7,7 @@ import com.platform.common.dto.request.PageableRequest;
 import com.platform.common.dto.response.PageResponse;
 
 public interface ChapterService {
+    ResponseWithBody<ChapterDTO> findById(Long id);
     ResponseWithBody<ChapterDTO> save(ChapterCreateDTO chapterCreateDTO);
     ResponseWithBody<PageResponse<ChapterDTO>> paginate(PageableRequest pageableRequest);
 }

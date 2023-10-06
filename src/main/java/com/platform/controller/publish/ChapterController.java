@@ -11,10 +11,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/v1/chapters")
@@ -27,7 +25,16 @@ public class ChapterController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Indicates that the request was executed successfully"),
             @ApiResponse(responseCode = "500", description = "Indicates that there is a server error occurs during executing the request")})
+    @GetMapping(value = "/{id}", produces = "application/json")
+    public ResponseWithBody<ChapterDTO> findById(@PathVariable Long id){
+        return chapterService.findById(id);
+    }
+
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Indicates that the request was executed successfully"),
+            @ApiResponse(responseCode = "500", description = "Indicates that there is a server error occurs during executing the request")})
     @PostMapping(value = "/create", consumes = "application/json",produces = "application/json")
+    @Secured("ROLE_USER")
     public ResponseWithBody<ChapterDTO> create(@RequestBody ChapterCreateDTO chapterCreateDTO){
         return chapterService.save(chapterCreateDTO);
     }

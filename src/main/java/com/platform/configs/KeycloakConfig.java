@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -12,6 +13,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(securedEnabled = true) // Enable @Secured annotation
 @RequiredArgsConstructor
 @ConditionalOnProperty(name = "keycloak.enabled", havingValue = "true", matchIfMissing = true)
 public class KeycloakConfig {
@@ -33,13 +35,13 @@ public class KeycloakConfig {
         httpSecurity.oauth2ResourceServer().jwt().jwtAuthenticationConverter(jwtAuthConverter);
 
         // set permission on endpoints
-        httpSecurity.authorizeHttpRequests()
-                // Allow swagger request
-                .requestMatchers("/v2/api-docs", "v3/api-docs/**", "/swagger-ui/**", "/swagger-ui", "/swagger-ui.html", "/swagger-resources/**", "/actuator/**")
-                .permitAll()
-                // req authenticate for apis
-                .requestMatchers("/**")
-                .authenticated();
+//        httpSecurity.authorizeHttpRequests()
+//                // Allow swagger request
+//                .requestMatchers("/v2/api-docs", "v3/api-docs/**", "/swagger-ui/**", "/swagger-ui", "/swagger-ui.html", "/swagger-resources/**", "/actuator/**")
+//                .permitAll()
+//                // req authenticate for apis
+//                .requestMatchers("/**")
+//                .authenticated();
 
         // Return
         return httpSecurity.build();

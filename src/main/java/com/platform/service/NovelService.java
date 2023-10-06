@@ -7,6 +7,7 @@ import com.platform.common.dto.request.PageableRequest;
 import com.platform.common.dto.response.PageResponse;
 
 public interface NovelService {
+    ResponseWithBody<NovelDTO> findById(Long id);
     ResponseWithBody<NovelDTO> save(NovelCreateDTO novelCreateDTO);
     ResponseWithBody<PageResponse<NovelDTO>> paginate(PageableRequest pageableRequest);
 }

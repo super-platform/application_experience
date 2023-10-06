@@ -3,6 +3,7 @@ package com.platform.controller.publish;
 import com.platform.common.dto.ResponseWithBody;
 import com.platform.common.dto.author.AuthorCreateDTO;
 import com.platform.common.dto.author.AuthorDTO;
+import com.platform.common.dto.novel.NovelDTO;
 import com.platform.common.dto.request.PageableRequest;
 import com.platform.common.dto.response.PageResponse;
 import com.platform.service.AuthorService;
@@ -11,10 +12,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/v1/authors")
@@ -23,6 +21,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class AuthorController {
     private final AuthorService authorService;
+
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Indicates that the request was executed successfully"),
+            @ApiResponse(responseCode = "500", description = "Indicates that there is a server error occurs during executing the request")})
+    @GetMapping(value = "/{id}", produces = "application/json")
+    public ResponseWithBody<AuthorDTO> findById(@PathVariable Long id){
+        return authorService.findById(id);
+    }
 
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Indicates that the request was executed successfully"),

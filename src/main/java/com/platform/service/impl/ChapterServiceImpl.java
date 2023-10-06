@@ -10,6 +10,7 @@ import com.platform.service.ChapterService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -18,6 +19,9 @@ import java.util.HashMap;
 @Service
 @Slf4j
 public class ChapterServiceImpl extends BaseServiceImpl implements ChapterService {
+
+    @Value(value = "${url.novel-backend-service.chapter.findById}")
+    private String findByIdUrl;
 
     @Value(value = "${url.novel-backend-service.chapter.create}")
     private String createUrl;
@@ -29,6 +33,12 @@ public class ChapterServiceImpl extends BaseServiceImpl implements ChapterServic
         super(restTemplateAPI, objectMapper);
     }
 
+
+    @Override
+    public ResponseWithBody<ChapterDTO> findById(Long id) {
+
+        return getResultCall(null, String.format(findByIdUrl, id), HttpMethod.GET, new HashMap<>(), ChapterDTO.class);
+    }
 
     @Override
     public ResponseWithBody<ChapterDTO> save(ChapterCreateDTO chapterCreateDTO) {
